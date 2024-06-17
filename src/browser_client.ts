@@ -1,15 +1,15 @@
-import { log } from "console";
 import puppeteer, { Handler, HTTPResponse, PuppeteerLaunchOptions } from "puppeteer";
 
-export const openPage = async (interceptResponse?: Handler<HTTPResponse>, options: PuppeteerLaunchOptions = {}) => {
+export const openIntercityPage = async (interceptResponse?: Handler<HTTPResponse>, options: PuppeteerLaunchOptions = {}) => {
     const browser = await puppeteer.launch(options);
     const page = await browser.newPage();
+    const url = 'https://ebilet.intercity.pl/';
 
     if (interceptResponse) {
         page.on('response', interceptResponse);
     }
 
-    await page.goto('https://ebilet.intercity.pl/');
+    await page.goto(url);
     await page.setViewport({ width: 1080, height: 1024 });
 
     await page.waitForSelector('[aria-label="Zaakceptuj wszystko"]');
@@ -18,8 +18,8 @@ export const openPage = async (interceptResponse?: Handler<HTTPResponse>, option
     return { page, browser };
 }
 
-export const getDeviceCode = async (): Promise<string | undefined>  => {
-    const { page, browser } = await openPage();
+export const getDeviceNumber = async (): Promise<string | undefined>  => {
+    const { page, browser } = await openIntercityPage();
     await page.waitForFunction(() => (window as any).env !== undefined);
     const envVariables = await page.evaluate(() => {
         return (window as any).env;
