@@ -19,7 +19,7 @@ export const loadStationsFromIntercity = async () => {
         }
     };
 
-    const { browser } = await openIntercityPage(interceptResponse, {headless: false});
+    const { browser } = await openIntercityPage(interceptResponse, { });
 
     // Wait until stations are defined or a timeout is reached
     try {

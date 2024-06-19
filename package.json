@@ -1,21 +1,24 @@
 {
-  "name": "puppeter-demo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "discounts-express",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.14.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "sst": "^2.43.1",
+    "aws-cdk-lib": "2.142.1",
+    "constructs": "10.3.0",
+    "typescript": "^5.4.5",
+    "@tsconfig/node18": "^18.2.4"
   },
-  "dependencies": {
-    "axios": "^1.7.2",
-    "puppeteer": "^22.10.1"
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }
