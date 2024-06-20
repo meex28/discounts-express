@@ -1,11 +1,10 @@
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { loadStationsFromIntercity } from "@discounts-express/core/src/intercity/service"
 import { ApiHandler } from "sst/node/api";
+import { updateAllStations } from "@discounts-express/core/services/station/service";
 
-export const get = ApiHandler(async (event) => {
-    const stations = await loadStationsFromIntercity();
+export const updateAll = ApiHandler(async (event) => {
+    const stations = await updateAllStations();
     return {
         statusCode: 200,
-        body: JSON.stringify({stations})
+        body: JSON.stringify({ stations })
     }
-}) 
+}); 

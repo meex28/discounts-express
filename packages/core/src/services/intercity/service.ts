@@ -1,8 +1,8 @@
-import { mapToConnection, mapToPrice, mapToStation } from "./model_mappings";
 import { intercityApiClient } from "./api_client";
-import { Connection, Price, Station } from "./model";
+import { ConnectionIcDto, PriceIcDto, StationIcDto } from "./model";
+import { mapToConnection, mapToPrice, mapToStation } from "./model_mappings";
 
-export const loadStationsFromIntercity = async (): Promise<Station[]> => {
+export const loadStationsFromIntercity = async (): Promise<StationIcDto[]> => {
     const payload = {
         metoda: 'pobierzStacje'
     };
@@ -21,7 +21,7 @@ export const loadConnectionsFromIntercity = async (
     departureTime: string,
     arrivalTime: string,
     maxTransfers: number
-): Promise<Connection[]> => {
+): Promise<ConnectionIcDto[]> => {
     const payload = {
         stacjaWyjazdu: departureStationCode,
         stacjaPrzyjazdu: arrivalStationCode,
@@ -39,8 +39,8 @@ export const loadConnectionsFromIntercity = async (
 }
 
 export const loadConnectionPricesFromIntercity = async (
-    connection: Connection,
-): Promise<Price[]> => {
+    connection: ConnectionIcDto,
+): Promise<PriceIcDto[]> => {
     const payload = {
         odcinki: connection.sections.map(section => ({
             pociagNr: section.trainNumber,
@@ -48,7 +48,7 @@ export const loadConnectionPricesFromIntercity = async (
             stacjaOdKod: section.departureStationCode,
             stacjaDoKod: section.arrivalStationCode
         })),
-        podrozni: [{kodZakupowyZnizki: 1010}],
+        podrozni: [{ kodZakupowyZnizki: 1010 }],
         ofertaKod: 1, // TODO: what does this mean?
         metoda: 'sprawdzCene'
     };

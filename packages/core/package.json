@@ -7,12 +7,15 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "vitest": "^1.6.0",
     "@types/node": "^20.14.2",
-    "sst": "^2.43.1"
+    "sst": "^2.43.1",
+    "vitest": "^1.6.0"
   },
   "dependencies": {
-    "zod": "^3.23.8",
-    "axios": "^1.7.2"
+    "aws-sdk": "^2.1644.0",
+    "axios": "^1.7.2",
+    "electrodb": "^2.14.1",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
   }
 }

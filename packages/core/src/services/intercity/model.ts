@@ -1,9 +1,9 @@
-export interface Station {
+export interface StationIcDto {
     code: number;
     name: string;
 }
 
-export interface ConnectionSection {
+export interface ConnectionSectionIcDto {
     departureStationCode: number,
     arrivalStationCode: number,
     departureTime: string,
@@ -13,15 +13,15 @@ export interface ConnectionSection {
     trainName: string
 }
 
-export interface Connection {
+export interface ConnectionIcDto {
     departureStationCode: number,
     arrivalStationCode: number,
     departureTime: string,
     arrivalTime: string,
-    sections: ConnectionSection[]
+    sections: ConnectionSectionIcDto[]
 }
 
-export interface Price {
+export interface PriceIcDto {
     placeTypeCode: number,
     priceTypeCode: number,
     priceTypeName: number,

@@ -1,15 +1,15 @@
-import { Connection, ConnectionSection, Price, Station } from "./model";
+import { ConnectionIcDto, ConnectionSectionIcDto, PriceIcDto, StationIcDto } from "./model";
 
 // Mappings from Intercity API to internal model
 
 type ModelMapping<T> = Record<keyof T, string>;
 
-const stationMapping: ModelMapping<Station> = {
+const stationMapping: ModelMapping<StationIcDto> = {
     code: 'kod',
     name: 'nazwa'
 };
 
-const connectionSectionMapping: ModelMapping<ConnectionSection> = {
+const connectionSectionMapping: ModelMapping<ConnectionSectionIcDto> = {
     departureStationCode: 'stacjaWyjazdu',
     arrivalStationCode: 'stacjaPrzyjazdu',
     // TODO: check names
@@ -20,7 +20,7 @@ const connectionSectionMapping: ModelMapping<ConnectionSection> = {
     trainName: 'nazwaPociagu'
 };
 
-const connectionMapping: ModelMapping<Connection> = {
+const connectionMapping: ModelMapping<ConnectionIcDto> = {
     departureStationCode: 'stacjaWyjazdu', // TODO: those names are computed from sections - think how to handle it
     arrivalStationCode: 'stacjaPrzyjazdu',
     departureTime: 'dataWyjazdu',
@@ -28,7 +28,7 @@ const connectionMapping: ModelMapping<Connection> = {
     sections: 'pociagi'
 };
 
-const priceMapping: ModelMapping<Price> = {
+const priceMapping: ModelMapping<PriceIcDto> = {
     placeTypeCode: 'rodzajMiejscaKod',
     priceTypeCode: 'cenaTypKod',
     priceTypeName: 'cenaTypNazwa',
@@ -36,19 +36,19 @@ const priceMapping: ModelMapping<Price> = {
     price: 'cena'
 };
 
-export const mapToStation = (data: Record<string, string>): Station => mapToModel<Station, typeof data>(data, stationMapping);
+export const mapToStation = (data: Record<string, string>): StationIcDto => mapToModel<StationIcDto, typeof data>(data, stationMapping);
 
-export const mapToConnection = (data: Record<string, any>): Connection => {
-    const connection = mapToModel<Connection, typeof data>(data, connectionMapping);
+export const mapToConnection = (data: Record<string, any>): ConnectionIcDto => {
+    const connection = mapToModel<ConnectionIcDto, typeof data>(data, connectionMapping);
     connection.sections = connection.sections.map(
-        (section: Record<string, any>) => mapToModel<ConnectionSection, typeof section>(section, connectionSectionMapping)
+        (section: Record<string, any>) => mapToModel<ConnectionSectionIcDto, typeof section>(section, connectionSectionMapping)
     );
     connection.departureStationCode = connection.sections[0].departureStationCode;
     connection.arrivalStationCode = connection.sections[connection.sections.length - 1].arrivalStationCode;
     return connection;
 }
 
-export const mapToPrice = (data: Record<string, any>): Price => mapToModel<Price, typeof data>(data, priceMapping);
+export const mapToPrice = (data: Record<string, any>): PriceIcDto => mapToModel<PriceIcDto, typeof data>(data, priceMapping);
 
 export function mapToModel<OUTPUT extends {}, INPUT extends {}>(data: INPUT, mappings: Record<keyof OUTPUT, keyof INPUT>): OUTPUT {
     return Object.keys(mappings).reduce((result, key) => {
