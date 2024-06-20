@@ -12,6 +12,7 @@ export function API({ stack }: StackContext) {
     },
     routes: {
       "POST /stations": "packages/functions/src/stations.updateAll",
+      "GET /connections/intercity": "packages/functions/src/intercity_connections.get",
     },
   });
 
