@@ -1,5 +1,5 @@
 import { Entity, EntityItem } from "electrodb";
-import { dynamoClient, dynamoTable } from "./config";
+import { dynamoClient, dynamoTable } from "../common/config";
 
 export const Journey = new Entity({
     model: {
