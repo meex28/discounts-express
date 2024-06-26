@@ -1,7 +1,7 @@
-import { Api, StackContext, use } from "sst/constructs";
+import { Api, StackContext, StaticSite, use } from "sst/constructs";
 import { Storage } from "./StorageStack";
 
-export function API({ stack }: StackContext) {
+export function WebStack({ stack }: StackContext) {
   const { table } = use(Storage);
 
   const api = new Api(stack, "api", {
@@ -16,7 +16,17 @@ export function API({ stack }: StackContext) {
     },
   });
 
+  const site = new StaticSite(stack, "react-frontend", {
+    path: "packages/frontend",
+    buildOutput: "dist",
+    buildCommand: "npm run build",
+    environment: {
+      VITE_API_URL: api.url
+    },
+  });
+
   stack.addOutputs({
     ApiEndpoint: api.url,
+    SiteUrl: site.url
   });
 }
