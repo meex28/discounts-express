@@ -10,6 +10,9 @@ export default {
     };
   },
   stacks(app) {
+    if (app.stage !== "prod") {
+      app.setDefaultRemovalPolicy("destroy");
+    }
     app.stack(Storage).stack(WebStack);
   }
 } satisfies SSTConfig;

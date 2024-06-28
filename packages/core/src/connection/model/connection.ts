@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { Entity, EntityItem } from "electrodb";
-import { dynamoClient, dynamoTable } from "./config";
+import { dynamoClient, dynamoTable } from "../../common/config";
 
 export const Connection = new Entity({
     model: {
@@ -20,19 +20,24 @@ export const Connection = new Entity({
             type: "string"
         },
         departureTime: {
-            type: "string"
+            type: "string",
+            required: true
         },
         arrivalTime: {
-            type: "string"
+            type: "string",
+            required: true
         },
         trainCategory: {
-            type: "string"
+            type: "string",
+            required: true
         },
         trainNumber: {
-            type: "number"
+            type: "number",
+            required: true
         },
         trainName: {
-            type: "string"
+            type: "string",
+            required: true
         }
     },
     indexes: {

@@ -1,5 +1,5 @@
 import { intercityApiClient } from "./api_client";
-import { ConnectionIcDto, PriceIcDto, StationIcDto } from "./model";
+import { ConnectionIcDto, ConnectionSectionIcDto, PriceIcDto, StationIcDto } from "./model";
 import { mapToConnection, mapToPrice, mapToStation } from "./model_mappings";
 
 export const loadStationsFromIntercity = async (): Promise<StationIcDto[]> => {
@@ -39,10 +39,10 @@ export const loadConnectionsFromIntercity = async (
 }
 
 export const loadConnectionPricesFromIntercity = async (
-    connection: ConnectionIcDto,
+    sections: Pick<ConnectionSectionIcDto, "trainNumber" | "departureTime" | "departureStationCode" | "arrivalStationCode">[]
 ): Promise<PriceIcDto[]> => {
     const payload = {
-        odcinki: connection.sections.map(section => ({
+        odcinki: sections.map(section => ({
             pociagNr: section.trainNumber,
             wyjazdData: section.departureTime,
             stacjaOdKod: section.departureStationCode,

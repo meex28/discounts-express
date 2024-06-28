@@ -1,5 +1,5 @@
 import { Entity, EntityItem } from "electrodb";
-import { dynamoClient, dynamoTable } from "../common/config";
+import { dynamoClient, dynamoTable } from "../../common/config";
 
 export const Price = new Entity({
     model: {
@@ -8,11 +8,14 @@ export const Price = new Entity({
         service: "discount-express"
     },
     attributes: {
-        journeyId: {
+        connectionId: {
             type: "string"
         },
-        timeBeforeDeparture: {
-            type: "string",
+        departureTimestamp: {
+            type: "number"
+        },
+        timeUntilDepartureCheck: {
+            type: "number",
         },
         placeTypeCode: {
             type: "number"
@@ -21,7 +24,7 @@ export const Price = new Entity({
             type: "number"
         },
         priceTypeName: {
-            type: "number"
+            type: "string"
         },
         class: {
             type: "number"
@@ -34,11 +37,11 @@ export const Price = new Entity({
         price: {
             pk: {
                 field: "pk",
-                composite: ["journeyId"]
+                composite: ["connectionId"]
             },
             sk: {
                 field: "sk",
-                composite: ["class", "placeTypeCode", "timeBeforeDeparture"]
+                composite: ["class", "placeTypeCode", "timeUntilDepartureCheck"]
             }
         }
     }

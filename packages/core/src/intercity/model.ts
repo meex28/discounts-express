@@ -24,7 +24,7 @@ export interface ConnectionIcDto {
 export interface PriceIcDto {
     placeTypeCode: number,
     priceTypeCode: number,
-    priceTypeName: number,
+    priceTypeName: string,
     class: number,
     price: number
 }

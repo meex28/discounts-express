@@ -14,10 +14,12 @@ export const Station = new Entity({
             default: () => randomUUID()
         },
         name: {
-            type: "string"
+            type: "string",
+            required: true
         },
         code: {
-            type: "number"
+            type: "number",
+            required: true
         }
     },
     indexes: {
@@ -31,11 +33,11 @@ export const Station = new Entity({
                 composite: ["name"]
             }
         },
-        byName: {
-            index: "byName",
+        byCode: {
+            index: "gsi1",
             pk: {
                 field: "gsi1pk",
-                composite: ["name"]
+                composite: ["code"]
             },
             sk: {
                 field: "gsi1sk",

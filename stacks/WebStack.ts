@@ -13,7 +13,10 @@ export function WebStack({ stack }: StackContext) {
     routes: {
       "POST /stations": "packages/functions/src/stations.updateAll",
       "GET /stations": "packages/functions/src/stations.get",
-      "GET /connections/intercity": "packages/functions/src/intercity_connections.get",
+
+      "POST /connections": "packages/functions/src/connections.create",
+      "GET /connections/{id}": "packages/functions/src/connections.get",
+      "GET /connections/external": "packages/functions/src/external_connections.get",
     },
   });
 
