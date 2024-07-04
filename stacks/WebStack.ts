@@ -11,12 +11,12 @@ export function WebStack({ stack }: StackContext) {
       }
     },
     routes: {
-      "POST /stations": "packages/functions/src/stations.updateAll",
-      "GET /stations": "packages/functions/src/stations.get",
+      "POST /stations": "packages/functions/src/station/update.handler",
+      "GET /stations": "packages/functions/src/station/get.handler",
 
-      "POST /connections": "packages/functions/src/connections.create",
-      "GET /connections/{id}": "packages/functions/src/connections.get",
-      "GET /connections/external": "packages/functions/src/external_connections.get",
+      "POST /connections": "packages/functions/src/connection/create.handler",
+      "GET /connections/{id}": "packages/functions/src/connection.get",
+      "GET /connections/external": "packages/functions/src/external_connection/get.handler",
     },
   });
 

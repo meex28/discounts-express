@@ -1,5 +1,11 @@
 import { StationResponse } from "../station/dto";
 
+export interface GetExternalConnectionsRequest {
+    departureStationCode: number;
+    arrivalStationCode: number;
+    departureTime: string;
+}
+
 export interface ConnectionResponse {
     id: string;
     departureStation: StationResponse;
@@ -9,4 +15,14 @@ export interface ConnectionResponse {
     trainCategory: string;
     trainNumber: number;
     trainName: string;
+}
+
+export interface CreateConnectionRequest {
+    departureStationCode: number;
+    arrivalStationCode: number;
+    departureTime: string;
+}
+
+export interface GetConnectionRequest {
+    id: string;
 }
