@@ -17,6 +17,9 @@ export function WebStack({ stack }: StackContext) {
       "POST /connections": "packages/functions/src/connection/create.handler",
       "GET /connections/{id}": "packages/functions/src/connection.get",
       "GET /connections/external": "packages/functions/src/external_connection/get.handler",
+
+      "GET /docs": "packages/functions/src/docs/docs.handler",
+      "GET /docs/openapi.yaml": "packages/functions/src/docs/docs-generator.handler",
     },
   });
 

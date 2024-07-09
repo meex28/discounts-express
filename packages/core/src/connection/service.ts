@@ -12,6 +12,7 @@ export const getExternalConnections = async (
     arrivalStationCode: number,
     departureTime: string,
 ) => {
+    // TODO: return ConnectionResponse
     const departureTimeDate = new Date(departureTime);
     const arrivalTime = new Date(
         departureTimeDate.getFullYear(),

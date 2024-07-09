@@ -1,6 +1,6 @@
 import { StationResponse } from "../station/dto";
 
-export interface GetExternalConnectionsRequest {
+export interface GetExternalConnectionRequest {
     departureStationCode: number;
     arrivalStationCode: number;
     departureTime: string;

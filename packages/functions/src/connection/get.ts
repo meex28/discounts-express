@@ -1,10 +1,12 @@
+import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { GetConnectionRequest } from "@discounts-express/core/connection/dto";
 import { getConnection } from "@discounts-express/core/connection/service";
 import { ApiHandler } from "sst/node/api";
 import { z } from "zod";
+import { connectionResponseSchema } from "./connection.contract";
 
 export const handler = ApiHandler(async (event) => {
-    const { id } = PathParametersParser.parse(event.pathParameters);
+    const { id } = getConnectionRequestSchema.parse(event.pathParameters);
     const connection = await getConnection(id);
     return {
         statusCode: 200,
@@ -12,6 +14,37 @@ export const handler = ApiHandler(async (event) => {
     };
 });
 
-const PathParametersParser: z.ZodType<GetConnectionRequest> = z.object({
+const getConnectionRequestSchema: z.ZodType<GetConnectionRequest> = z.object({
     id: z.string(),
 });
+
+export const registerPathGet = (registry: OpenAPIRegistry) => {
+    const getConnectionRequestApiSchema = registry.register(
+        "CreateConnectionRequest",
+        getConnectionRequestSchema
+    );
+
+    registry.registerPath({
+        method: "get",
+        path: "/connections",
+        request: {
+            body: {
+                content: {
+                    "application/json": {
+                        schema: getConnectionRequestApiSchema
+                    }
+                }
+            }
+        },
+        responses: {
+            200: {
+                description: "Return connection by id",
+                content: {
+                    "application/json": {
+                        schema: connectionResponseSchema
+                    }
+                }
+            },
+        }
+    })
+}
