@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px
+}
+
+.logo {
+    height: 64px;
+}
+
+.divider {
+    margin-top: 10px;
+}
