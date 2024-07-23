@@ -1,10 +1,18 @@
-import Header from "./components/core/header/Header"
+import { createRouter, RouterProvider } from "@tanstack/react-router"
+import { routeTree } from './routeTree.gen'
+
+const router = createRouter({ routeTree })
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
 
 function App() {
   return (
     <>
-      <Header />
-      <h1>Hello world!</h1>
+      <RouterProvider router={router} />
     </>
   )
 }
